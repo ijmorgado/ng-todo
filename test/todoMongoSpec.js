@@ -1,4 +1,4 @@
-beforeEach(module('todo'));
+beforeEach(module('todoApp'));
 
 var API_URL = 'http://offline.api.mongolab.com/api/1/databases/ng-todo/collections/items?apiKey=4fc27c99e4b0401bdbfd1741';
 //var API_URL = 'https://api.mongolab.com/api/1/databases/ng-todo/collections/items?apiKey=4fc27c99e4b0401bdbfd1741';
@@ -45,7 +45,7 @@ describe('App with Mongo', function() {
 
   describe('add', function() {
     it('should store item in mongolab', function() {
-      httpBackend.expectPOST(API_URL, {text: 'FAKE TASK'}).respond();
+      httpBackend.expectPOST(API_URL, {text: 'FAKE TASK', done:false}).respond();
 
       scope.add({text: 'FAKE TASK'});
     });

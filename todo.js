@@ -1,74 +1,37 @@
-var app = angular.module('todo', ['ngResource']);
+var todoApp = angular.module('todoApp', ['ngResource']);
 
-app.constant('apiKey', '4fc27c99e4b0401bdbfd1741');
+todoApp.controller('AppCtrl', function AppCtrl($scope) {
 
-app.factory('Item', function($resource, apiKey) {
-  var Item = $resource('http://api.mongolab.com/api/1/databases/ng-todo/collections/items/:id', {
-    apiKey: apiKey
-  }, {
-    update: {method: 'PUT'}
-  });
-
-  Item.prototype.$remove = function() {
-    Item.remove({id: this._id.$oid});
-  };
-
-  Item.prototype.$update = function() {
-    return Item.update({id: this._id.$oid}, angular.extend({}, this, {_id: undefined}));
-  };
-
-  Item.prototype.done = false;
-
-  return Item;
-});
+  // define userName model
 
 
-app.controller('AppCtrl', function($scope, Item) {
+  // define items model
 
-  $scope.items = Item.query();
 
-  $scope.add = function() {
-    var item = new Item({text: $scope.newText});
-    $scope.items.push(item);
-    $scope.newText = '';
+  // publish it on scope
 
-    // save to mongolab
-    item.$save();
-  };
 
+
+  // computed property
   $scope.remaining = function() {
-    return $scope.items.reduce(function(count, item) {
+    return items.reduce(function(count, item) {
       return item.done ? count : count + 1;
     }, 0);
   };
 
+
+  // event handler
+  $scope.add = function(newItem) {
+    var item = {text: newItem.text, done: false};
+    items.push(item);
+    newItem.text = '';
+  };
+
+
+  // event handler
   $scope.archive = function() {
-    $scope.items = $scope.items.filter(function(item) {
-      if (item.done) {
-        item.$remove();
-        return false;
-      }
-      return true;
+    items = $scope.items = items.filter(function(item) {
+      return !item.done;
     });
   };
 });
-
-
-/*
-
-app.config(function($routeProvider) {
-  $routeProvider.
-      when('/', {controller: 'AppCtrl', template: 'todo.html'}).
-      when('/hello', {template: 'hello.html'}).
-      otherwise({redirectTo: '/'});
-});
-
-
-
- <nav>
- [<a href="#/">Todo</a>] [<a href="#/hello">hello</a>]
- </nav>
-
- <ng-view></ng-view>
-
-*/

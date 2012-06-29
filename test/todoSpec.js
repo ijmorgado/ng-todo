@@ -1,4 +1,4 @@
-beforeEach(module('todo'));
+beforeEach(module('todoApp'));
 
 describe('AppCtrl', function() {
   var scope;

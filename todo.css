@@ -1,3 +1,7 @@
+body {
+  padding-left: 5px !important;
+}
+
 .done-true {
   color: gray;
   text-decoration: line-through;
@@ -5,4 +9,45 @@
 
 nav {
   padding-bottom: 30px;
+}
+
+input.ng-invalid-maxlength {
+  border: 3px solid red;
+}
+
+select {
+  display: block;
+}
+
+
+.avatar {
+  display: inline-block;
+  overflow: hidden;
+  margin: 3px 0px;
+}
+
+
+.avatar img {
+  height: 30px;
+  width: 30px;
+  padding: 2px 0px 2px 4px;
+}
+
+.avatar span {
+  display: inline-block;
+  width: 1px;
+  height: 18px;
+  overflow: hidden;
+  padding-left: 1px;
+  -webkit-transition:0.6s ease-in-out width;
+  -moz-transition:0.6s ease-in-out width;
+  -ms-transition:0.6s ease-in-out width;
+  -o-transition:0.6s ease-in-out width;
+  transition:0.6s ease-in-out width;
+}
+
+
+.avatar:hover span {
+  padding-right: 2px;
+  width: 30px;
 }

@@ -68,10 +68,11 @@ var DbStore = function() {
 };
 
 var db = new DbStore();
-db.create({text: 'Try AngularJS', done: false});
-db.create({text: 'Visit San Diego Downtown', done: true});
-db.create({text: 'Run on Mission Beach', done: true});
-db.create({text: 'Have FUN!', done: false});
+db.create({text: 'Make AngularJS Awesome', done: false, minion: 'Vojta'});
+db.create({text: 'Help Brad write ToDo App', done: true, minion: 'Miško'});
+db.create({text: 'Rock Throne of JS', done: false, minion: 'Brad'});
+db.create({text: 'Take over the World', done: true, minion: 'Miško'});
+
 
 var handler = {
 
