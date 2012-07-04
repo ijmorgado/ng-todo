@@ -10,27 +10,39 @@
   <script src="libs/angular-resource.js"></script>
   <script src="todo.js"></script>
 </head>
-<body class="well">
 
-<h1>Igor's Todo List</h1>
+<body class="well" ng-app="todoApp" ng-controller="AppCtrl">
+
+<h1><span avatar user-name="userName"></span> {{userName}}'s Todo List</h1>
 
 <p>
-  Remaining <strong>XXX</strong> of <strong>XXX</strong>.
-  [ <a href>archive</a> ]
+  Remaining <strong>{{remaining()}}</strong> of <strong>{{items.length}}</strong>.
+  [ <a href ng-click="archive()">archive</a> ]
 </p>
 
 <ul class="unstyled">
-  <li>
-    <input type="checkbox">
-    task 1
+  <li ng-repeat="item in items">
+    <input type="checkbox" ng-model="item.done">
+    {{item.text}}
+    <avatar user-name="item.minion"></avatar>
   </li>
-  <li><input type="checkbox"> task 2</li>
-  <li><input type="checkbox"> task 3</li>
 </ul>
 
-<form>
-  <input>
-  <button class="btn btn-primary">
+
+<form name="newItemForm">
+  <input name="newItemText"
+         ng-model="newItem.text"
+         required
+         ng-maxlength="15">
+  <div ng-show="newItemForm.newItemText.$error.maxlength">Text too long!</div>
+  <select ng-model="newItem.minion" required>
+    <option>Brad</option>
+    <option>Miško</option>
+    <option>Vojta</option>
+  </select>
+  <button class="btn btn-primary"
+          ng-click="add(newItem)"
+          ng-disabled="newItemForm.$invalid">
     add
   </button>
 </form>

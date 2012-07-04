@@ -73,7 +73,6 @@ db.create({text: 'Help Brad write ToDo App', done: true, minion: 'Miško'});
 db.create({text: 'Rock Throne of JS', done: false, minion: 'Brad'});
 db.create({text: 'Take over the World', done: true, minion: 'Miško'});
 
-
 var handler = {
 
   GET: function(req, resp) {
